@@ -41,6 +41,8 @@ def create_game(player_1: UUID, player_2: UUID):
 
 @app.post("/games/find/")
 async def players_search(user_id: UUID):
+    if players_room.get(user_id):
+        return {"status": "already in game"}
     if user_id in find_queue:
         return {"status": "already_waiting"}
     
@@ -48,7 +50,7 @@ async def players_search(user_id: UUID):
         opponent = find_queue.pop(0)
         game_id = create_game(user_id, opponent)
         for player in [user_id, opponent]:
-            ws = users[player]
+            ws = users.get(player)
             if ws:
                 await ws.send_json({
                     "status": "oponent finded",
@@ -64,7 +66,9 @@ async def players_search(user_id: UUID):
 
 @app.post("/games/invite/send")
 async def invite_send(user_id: UUID, friend_id: UUID):
-    friend_ws = users[friend_id]
+    if players_room.get(user_id):
+        return {"status": "already in game"}
+    friend_ws = users.get(friend_id)
     if friend_ws:
         invite = Invite(invite_id=uuid4(), from_u=user_id, to_u=friend_id)
         invites.append(invite)
