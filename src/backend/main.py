@@ -1,10 +1,12 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from uuid import UUID, uuid4
 from chess_engine.board import Chess_Board, Status
 #from typing import Any
 
 class Room(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True) 
+
     white: UUID
     black: UUID
     board: Chess_Board
