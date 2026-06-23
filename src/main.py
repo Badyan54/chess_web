@@ -1,12 +1,13 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
 from uuid import UUID, uuid4
+from chess_engine.board import Chess_Board, Status
 #from typing import Any
 
 class Room(BaseModel):
     white: UUID
     black: UUID
-#    board: str
+    board: Chess_Board
 
 class Invite(BaseModel):
     invite_id: UUID
@@ -28,13 +29,27 @@ async def get_websocket(websocket: WebSocket, user_id: UUID):
     try:
         while True:
             data = await websocket.receive_json()
+            if data.action == "move":
+                room = rooms[data.user_id]
+                status, notation = room.board.play_turn(data.move)
+                if status == Status.WRONG_TURN:
+                    await websocket.send_json({"status": "WRONG_TURN"})
+                else:
+                    moves = board.get_moves()
+                    for player in [room.white, room.black]:
+                        await users[player].send_json({
+                            "status": status,
+                            "notation": notation,
+                            "board": board.board,
+                            "moves": moves
+                            })
 
     except WebSocketDisconnect:
         del users[user_id]
 
 def create_game(player_1: UUID, player_2: UUID):
     room_id = uuid4()
-    rooms[room_id] = Room(white=player_1, black=player_2) #board
+    rooms[room_id] = Room(white=player_1, black=player_2, board=Chess_Board()) #board
     players_room[player_1] = room_id
     players_room[player_2] = room_id
     return room_id
