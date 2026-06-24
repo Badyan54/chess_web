@@ -56,6 +56,15 @@ def create_game(player_1: UUID, player_2: UUID):
     players_room[player_2] = room_id
     return room_id
 
+@app.get("/games/state/receive")
+async def receive_state_back(user_id: UUID):
+    room = rooms[players_room[user_id]]
+    return {
+        "board": board.board,
+        "moves": board.get_moves()
+    }
+
+
 @app.post("/games/find/")
 async def players_search(user_id: UUID):
     if players_room.get(user_id):
