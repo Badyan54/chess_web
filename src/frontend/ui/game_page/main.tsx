@@ -1,9 +1,9 @@
-import Footer from "./footer";
+import Header from "./header";
 
 export default function Game_page() {
   return (
     <>
-        <Footer/>
+        <Header/>
     </>
   );
 }

@@ -2,7 +2,7 @@ import crown from "@/public/crown.svg"
 import id_card from "@/public/id-card.svg"
 import Image from "next/image";
 
-export default function Footer() {
+export default function Header() {
   return (
     <>
         <footer className="flex justify-between px-6 py-4">
