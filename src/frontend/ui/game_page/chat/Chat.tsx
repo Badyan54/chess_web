@@ -6,7 +6,7 @@ import Message from "./message"
 
 export default function Chat (){
   return(
-    <div className="grid grid-rows-[auto_1fr_auto] h-full py-1">
+    <div className="grid grid-rows-[auto_1fr_auto] h-full py-1 min-w-3xs">
       <div className="flex gap-2 items-center py-2">
         <Image 
           src={swords} 
