@@ -13,7 +13,7 @@ let default_shame = [
 
 export default function Board(){
   return(
-    <div className="grid grid-cols-8 aspect-square m-auto min-h-96 h-full">
+    <div className="grid grid-cols-8 aspect-square min-h-96 h-full">
       {default_shame.map((row, rowI) => 
       (row.map((col, colI) => (
         <Square
