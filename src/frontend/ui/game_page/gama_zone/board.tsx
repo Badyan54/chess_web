@@ -19,7 +19,7 @@ export default function Board(){
         <Square
           key={`${rowI}-${colI}`}
           figure={col}
-          bg_color={(colI + rowI) % 2 === 0 ? "bg-black" : "bg-white" }
+          bg_color={(colI + rowI) % 2 === 0 ? "bg-[#304E4A]" : "bg-[#8FA89C]" }
           />
       ))))}
     </div>
