@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Header() {
   return (
     <>
-      <footer className="flex justify-between px-6 py-4">
+      <footer className="flex justify-between px-6 py-2">
 
       <div className="flex items-center gap-2">
         <Image 

@@ -3,13 +3,13 @@ import Image from "next/image"
 
 export default function Player(){
   return(
-    <div className="flex gap-2">
-      <div className="rounded-full bg-white">
+    <div className="flex gap-2 items-center">
+      <div className="rounded-full bg-white h-10">
         <Image 
           src={girl} 
           alt="avatar" 
-          width={50} 
-          height={50} 
+          width={40} 
+          height={40} 
         />
       </div>
       <div>

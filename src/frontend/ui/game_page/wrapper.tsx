@@ -4,5 +4,5 @@ export default function Wrapper({
   children: React.ReactNode;
 }>)
 {
-  return <div className="grid grid-cols-[auto_1fr_auto] gap-10 h-screen">{children}</div>
+  return <div className="grid grid-cols-[auto_1fr_auto] flex-1 divide-x divide-[#1F232B]">{children}</div>
 }
